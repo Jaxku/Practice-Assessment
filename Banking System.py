@@ -13,6 +13,21 @@ class User:
         userList.append(self)
 
 
+def display_info(self):
+    print("#######################")
+    print("First Name: ", self.first_name)
+    print("Last Name: ", self.last_name)
+    print("Gender: ", self.gender)
+    print("Street Address: ", self.street_address)
+    print("City: ", self.city)
+    print("Email: ", self.email)
+    print("Credit Card Number: ", self.cc_number)
+    print("Credit Card Type: ", self.cc_type)
+    print("Balance: ", self.balance)
+    print("Account Number: ", self.account_no)
+    print("#######################")
+
+
 def generateUsers():
     import csv
     with open('bankUsers.csv', newline='') as csvfile:
@@ -20,18 +35,40 @@ def generateUsers():
         for line in filereader:
             User(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], float(line[8]), line[9])
 
-def findUser():
-    # TO COMPLETE
 
-    True
-    
+def findUser():
+    # COMPLETED
+    user_to_find = input("Enter the name of the user you want to find: ").title()
+    for user in userList:
+        full_name = f"{user.first_name} {user.last_name}"
+        if full_name == user_to_find:
+            display_info(user)
+            return
+    print("Sorry, no user was found for that name")
+    return None
+# True
+
+
 def overdrafts():
-    # TO COMPLETE
-    
-    True
-    
+    # COMPLETED
+    for user in userList:
+        if user.balance < 0:
+            print("#######################")
+            print(f"{user.first_name} {user.last_name} has an overdraft of {user.balance}")
+    if len(overdrafts) == 0:
+        print("No overdrafts found")
+        return
+#True
+
+
 def missingEmails():
     # TO COMPLETE
+    for user in userList:
+        if user.email == "":
+            print("#######################")
+            print(f"{user.first_name} {user.last_name} is missing an email")
+
+
 
     True
 
@@ -59,7 +96,7 @@ while userChoice != "Q":
     print("Type 4 to print bank details")
     print("Type 5 to transfer money")
     print("Type Q to quit")
-    userChoice = input("Enter choice: ")
+    userChoice = input("Enter choice: ").upper()
     print()
     
     if userChoice == "1":
