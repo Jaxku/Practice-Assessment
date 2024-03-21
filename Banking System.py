@@ -68,14 +68,16 @@ def missingEmails():
             print("#######################")
             print(f"{user.first_name} {user.last_name} is missing an email")
 
+#True
 
-
-    True
 
 def bankDetails():
     # TO COMPLETE
+    total_users = len(userList)
+    print(f"Total number of users: {total_users}")
+    total_worth = (sum([]))
 
-    True
+    # True
     
 def transfer():
     # TO COMPLETE
