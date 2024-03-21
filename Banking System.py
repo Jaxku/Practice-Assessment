@@ -55,10 +55,8 @@ def overdrafts():
         if user.balance < 0:
             print("#######################")
             print(f"{user.first_name} {user.last_name} has an overdraft of {user.balance}")
-    if len(overdrafts) == 0:
-        print("No overdrafts found")
-        return
-#True
+    return None
+# True
 
 
 def missingEmails():
@@ -68,23 +66,33 @@ def missingEmails():
             print("#######################")
             print(f"{user.first_name} {user.last_name} is missing an email")
 
-#True
+# True
 
 
 def bankDetails():
-    # TO COMPLETE
-    total_users = len(userList)
-    print(f"Total number of users: {total_users}")
-    total_worth = (sum([]))
+    # Completed
+    total_users = len(userList)     # Total number of members
+    print(f"Total number of members: {total_users}")
 
-    # True
+    total_worth = (sum([user.balance for user in userList]))    # Total worth of the bank
+    print(f" the total worth of the bank is {total_worth}")
+
+    highest_balance = max([user.balance for user in userList])      # Member with the highest balance
+    print(f"The member with the highest balance is "
+          f"{highest_balance.first_name} {highest_balance.last_name} "      
+          f"their total balance is {highest_balance.balance}")
+
+    lowest_balance = min([user.balance for user in userList])       # Member with the lowest balance
+    print(f"The member with the highest balance is "
+          f"{lowest_balance.first_name} {lowest_balance.last_name} "
+          f"their total balance is {lowest_balance.balance}")
+
     
 def transfer():
-    # TO COMPLETE
+    pass
 
-    True
-
-userList = []          
+# Main
+userList = []
 generateUsers()
 
 userChoice = ""
