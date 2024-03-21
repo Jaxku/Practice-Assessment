@@ -1,5 +1,6 @@
 class User:
-    def __init__(self, first_name, last_name, gender, street_address, city, email, cc_number, cc_type, balance, account_no):
+    def __init__(self, first_name, last_name, gender, street_address, city,
+                 email, cc_number, cc_type, balance, account_no):
         self.first_name = first_name
         self.last_name = last_name
         self.gender = gender
@@ -33,12 +34,14 @@ def generateUsers():
     with open('bankUsers.csv', newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter=',', quotechar="'")
         for line in filereader:
-            User(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], float(line[8]), line[9])
+            User(line[0], line[1], line[2], line[3], line[4], line[5], line[6],
+                 line[7], float(line[8]), line[9])
 
 
 def findUser():
     # COMPLETED
-    user_to_find = input("Enter the name of the user you want to find: ").title()
+    user_to_find = input(
+        "Enter the name of the user you want to find: ").title()
     for user in userList:
         full_name = f"{user.first_name} {user.last_name}"
         if full_name == user_to_find:
@@ -46,6 +49,8 @@ def findUser():
             return
     print("Sorry, no user was found for that name")
     return None
+
+
 # True
 
 
@@ -54,8 +59,11 @@ def overdrafts():
     for user in userList:
         if user.balance < 0:
             print("#######################")
-            print(f"{user.first_name} {user.last_name} has an overdraft of {user.balance}")
+            print(
+                f"{user.first_name} {user.last_name} has an overdraft of {user.balance}")
     return None
+
+
 # True
 
 
@@ -66,30 +74,46 @@ def missingEmails():
             print("#######################")
             print(f"{user.first_name} {user.last_name} is missing an email")
 
+
 # True
 
 
 def bankDetails():
     # Completed
-    total_users = len(userList)     # Total number of members
+    total_users = len(userList)  # Total number of members
     print(f"Total number of members: {total_users}")
 
-    total_worth = (sum([user.balance for user in userList]))    # Total worth of the bank
+    total_worth = (
+        sum([user.balance for user in userList]))  # Total worth of the bank
     print(f" the total worth of the bank is {total_worth}")
 
-    highest_balance = max([user.balance for user in userList])      # Member with the highest balance
-    print(f"The member with the highest balance is "
-          f"{highest_balance.first_name} {highest_balance.last_name} "      
-          f"their total balance is {highest_balance.balance}")
+    highest_balance = ["", 0]
+    lowest_balance = ["", 0]
+    for user in userList:
+        name = f"{user.first_name} {user.last_name}"
+        if user.balance < lowest_balance[1]:
+            lowest_balance = [name, user.balance]
+        elif user.balance > highest_balance[1]:
+            highest_balance = [name, user.balance]
 
-    lowest_balance = min([user.balance for user in userList])       # Member with the lowest balance
-    print(f"The member with the highest balance is "
-          f"{lowest_balance.first_name} {lowest_balance.last_name} "
-          f"their total balance is {lowest_balance.balance}")
+    print(f"The customer with the highest balance is {highest_balance[0]} with a balance of ${highest_balance[1]}")
+    print(f"The customer with the lowest balance is {lowest_balance[0]} with a balance of ${lowest_balance[1]}")
+    # highest_balance = max(
+    #     [user.balance for user in userList])  # Member with the highest balance
+    # print(f"The member with the highest balance is "
+    #       f"{highest_balance.first_name} {highest_balance.last_name} "
+    #       f"their total balance is {highest_balance.balance}")
+    #
+    # lowest_balance = min(
+    #     [user.balance for user in userList])  # Member with the lowest balance
+    # print(f"The member with the highest balance is "
+    #       f"{lowest_balance.first_name} {lowest_balance.last_name} "
+    #       f"their total balance is {lowest_balance.balance}")
 
-    
+
 def transfer():
     pass
+
 
 # Main
 userList = []
@@ -108,7 +132,7 @@ while userChoice != "Q":
     print("Type Q to quit")
     userChoice = input("Enter choice: ").upper()
     print()
-    
+
     if userChoice == "1":
         findUser()
     elif userChoice == "2":
@@ -118,5 +142,6 @@ while userChoice != "Q":
     elif userChoice == "4":
         bankDetails()
     elif userChoice == "5":
-        transfer()      
+        transfer()
     print()
+
