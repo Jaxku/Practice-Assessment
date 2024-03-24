@@ -112,8 +112,56 @@ def bankDetails():
 
 
 def transfer():
-    pass
+    # Step 1: Ask for the account number from which the trasnfer will be made
+    from_account_no = input("Enter your account number: ")
 
+    # Step 2: Display the name balance of the account
+    from_account = None
+    for user in userList:
+        if user.account_no == from_account_no:
+            from_account = user
+            print("Account Information:")
+            display_info(from_account)
+            break
+
+    else:
+        print("Sorry, account number not found")
+        return
+
+    # Step 3: Ask for the amount to transfer
+    transfer_amount = float(input("Enter the amount to transfer: "))
+    if transfer_amount <= 0 or transfer_amount > from_account.balance:
+        print("Invalid amount")
+        return
+
+    # Step 4: Ask for the account number to which the money will be transferred
+    to_account_no = input("Enter the account number to transfer to: ")
+
+    # Step 5: Show the name of the account to transfer to and confirm
+    to_account = None
+    for user in userList:
+        if user.account_no == to_account_no:
+            to_account = user
+            print(f"Transferring {transfer_amount} from {from_account.first_name} {from_account.last_name}"
+                  f" to {to_account.first_name} {to_account.last_name}.")
+            confirm = input("Confirm transfer? (Y/N): ").upper()
+            if confirm != "Y":
+                print("Transfer cancelled.")
+                return
+            break
+    else:
+        print("Recipient's account number not found.")
+        return
+
+    # Step 6: Perform the transfer and display updated balances
+    from_account.balance -= transfer_amount
+    to_account.balance += transfer_amount
+    print("Transfer successful.")
+    print("Updated Balances:")
+    print(f"{from_account.first_name} {from_account.last_name}: ${from_account.balance}")
+    print(f"{to_account.first_name} {to_account.last_name}: ${to_account.balance}")
+
+    pass
 
 # Main
 userList = []
